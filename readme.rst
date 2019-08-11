@@ -1,1 +1,1 @@
-This Unity3D project can be used as a template to create virtual IoT devices that can show up on a Mozilla IoT router when used in conjunction with this [repository](https://github.com/gatordevin/webthing-python-unity)
+This Unity3D project can be used as a template to create virtual IoT devices that can show up on a Mozilla IoT router when used in conjunction with this [repository](https://github.com/gatordevin/webthing-python-unity).
