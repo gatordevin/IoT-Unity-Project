@@ -10,8 +10,8 @@ git clone https://github.com/gatordevin/IoT-Unity-Project.git
 ```
 2. **Download** and **Install** the Unity Hub
 3. **Download** Unity Version *2019.2.0f1*
-4. Click Add under the projects tab and navigate to where the IoT-Unity-Project directory was downloaded
-5. Double click the project after it was added
+4. **Click** *Add* under the projects tab and navigate to where the IoT-Unity-Project directory was downloaded
+5. **Double click** the project after it was added
 6. **Download** and start python server, follow directions [here](https://github.com/gatordevin/webthing-python-unity)
-7. In unity select the gameobject IoTDevie Proxy from the left side of the screen and enter the Ip address of the computer running the python server on the right side under Socket Testing and Ip Address
-8. Click run and you should be able to see your devices in the Mozilla IoT gateway!
+7. In unity **select** the gameobject *IoTDevie Proxy* from the left side of the screen and **enter** the Ip address of the computer running the python server on the right side under *Socket Testing* and *Ip Address*
+8. **Click** *run* and you should be able to see your devices in the Mozilla IoT gateway!
