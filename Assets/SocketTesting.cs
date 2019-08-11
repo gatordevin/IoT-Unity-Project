@@ -16,6 +16,7 @@ public class SocketTesting : MonoBehaviour
     private bool dataRecv = false;
     private List<JSONObject> buffer;
     public string jsonData;
+    public string ipAddress = "172.16.0.30";
 	#endregion  	
 	// Use this for initialization 	
 	void Start () {
@@ -78,7 +79,7 @@ public class SocketTesting : MonoBehaviour
 	/// </summary>     
 	private void ListenForData() { 		
 		try { 			
-			socketConnection = new TcpClient("172.16.0.30", 2000);  			
+			socketConnection = new TcpClient(ipAddress, 2000);  			
 			Byte[] bytes = new Byte[1024];             
 			while (true) { 				
 				// Get a stream object for reading 				
