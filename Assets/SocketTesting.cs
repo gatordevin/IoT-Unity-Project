@@ -16,6 +16,8 @@ public class SocketTesting : MonoBehaviour
     private bool dataRecv = false;
     private List<JSONObject> buffer;
     public string jsonData;
+	public string deviceColor;
+	public string ipAddress = "172.16.0.30";
 	#endregion  	
 	// Use this for initialization 	
 	void Start () {
@@ -23,14 +25,19 @@ public class SocketTesting : MonoBehaviour
             
 	}  	
 	// Update is called once per frame
-	void Update () {  
-        if(firstTime){
-            Debug.Log("first time");
-            SendMessage("Start");
-            SendMessage(DevicesJson());
-            firstTime = false;
-        }else if(dataRecv){
-            //Debug.Log(jsonData);
+	void Update () {
+        if(dataRecv){
+            if(firstTime){
+				Debug.Log("first time");
+				DeviceInfoClass deviceInfoClass = new DeviceInfoClass();
+				deviceInfoClass.Color = deviceColor;
+				//SendMessage(JsonUtility.ToJson(deviceInfoClass));
+				if(jsonData == "waiting"){
+					SendMessage("Start");
+            		SendMessage(DevicesJson());
+				}
+            	firstTime = false;
+			}
             SendMessage("Data");
             dataRecv = false;
         }
@@ -39,7 +46,11 @@ public class SocketTesting : MonoBehaviour
         }
          
 		
-	}  	
+	}  
+	public class DeviceInfoClass
+    {
+        public String Color;
+    }	
     public class DevicesClass
     {
         public List<string> UnityLight = new List<string>();
@@ -78,7 +89,7 @@ public class SocketTesting : MonoBehaviour
 	/// </summary>     
 	private void ListenForData() { 		
 		try { 			
-			socketConnection = new TcpClient("172.16.0.30", 2000);  			
+			socketConnection = new TcpClient(ipAddress, 2000);  			
 			Byte[] bytes = new Byte[1024];             
 			while (true) { 				
 				// Get a stream object for reading 				

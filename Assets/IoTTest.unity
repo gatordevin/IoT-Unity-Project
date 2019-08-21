@@ -935,3 +935,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jsonData: 
+  deviceColor: Red
+  ipAddress: 127.0.0.1
