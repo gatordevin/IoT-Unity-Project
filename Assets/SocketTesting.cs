@@ -14,10 +14,12 @@ public class SocketTesting : MonoBehaviour
 	private Thread clientReceiveThread; 
     private bool firstTime = true;	
     private bool dataRecv = false;
-    private List<JSONObject> buffer;
+    public List<String> buffer;
+	//private string buffer;
     public string jsonData;
 	public string deviceColor;
 	public string ipAddress = "172.16.0.30";
+	private bool sent = false;
 	#endregion  	
 	// Use this for initialization 	
 	void Start () {
@@ -26,24 +28,20 @@ public class SocketTesting : MonoBehaviour
 	}  	
 	// Update is called once per frame
 	void Update () {
-        if(dataRecv){
-            if(firstTime){
-				Debug.Log("first time");
-				DeviceInfoClass deviceInfoClass = new DeviceInfoClass();
-				deviceInfoClass.Color = deviceColor;
-				//SendMessage(JsonUtility.ToJson(deviceInfoClass));
-				if(jsonData == "waiting"){
-					SendMessage("Start");
-            		SendMessage(DevicesJson());
-				}
-            	firstTime = false;
-			}
-            SendMessage("Data");
+		if(firstTime){
+			Debug.Log(DevicesJson());
+			SendMessage(DevicesJson());
+			firstTime = false;
+		}
+        if(buffer.Count != 0){
+			//SendMessage("{\"BaseStationLightThree\": {\"on\": true, \"brightness\": 99}}");
+			SendMessage(buffer[0]);
+			buffer.RemoveAt(0);
+        }else if(dataRecv){
+            SendMessage("get");
             dataRecv = false;
         }
-        if(buffer != null){
-
-        }
+        
          
 		
 	}  
@@ -76,6 +74,7 @@ public class SocketTesting : MonoBehaviour
 	/// </summary> 	
 	private void ConnectToTcpServer () { 		
 		try {  			
+			socketConnection = new TcpClient(ipAddress, 2000);
 			clientReceiveThread = new Thread (new ThreadStart(ListenForData)); 			
 			clientReceiveThread.IsBackground = true; 			
 			clientReceiveThread.Start();  		
@@ -88,8 +87,7 @@ public class SocketTesting : MonoBehaviour
 	/// Runs in background clientReceiveThread; Listens for incomming data. 	
 	/// </summary>     
 	private void ListenForData() { 		
-		try { 			
-			socketConnection = new TcpClient(ipAddress, 2000);  			
+		try {		
 			Byte[] bytes = new Byte[1024];             
 			while (true) { 				
 				// Get a stream object for reading 				

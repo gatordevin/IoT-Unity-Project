@@ -934,6 +934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4041f412eb3b4f635b1c56f48e77cb05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffer: []
   jsonData: 
   deviceColor: Red
-  ipAddress: 127.0.0.1
+  ipAddress: 172.16.0.30
